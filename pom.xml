@@ -6,7 +6,17 @@
 
     <groupId>cn.gaohank.idea</groupId>
     <artifactId>idea-coding-proj</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <modules>
+        <module>java</module>
+        <module>scala</module>
+        <module>desigin</module>
+        <module>j2ee</module>
+        <module>thrift</module>
+        <module>spark</module>
+        <module>hadoop</module>
+    </modules>
 
 
 </project>

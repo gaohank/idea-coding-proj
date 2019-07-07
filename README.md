@@ -25,11 +25,14 @@
 - 插件
     - maven-assembly-plugin
     - maven-shade-plugin
-    - maven-compiler-plugin  
-    - maven-jar-plugin  
+    - maven-compiler-plugin
+    - maven-jar-plugin
     - maven-dependency-plugin
 - 部署
     - 通过指令    
 
 ## 测试
 > 新知识点，可以合并到该项目中，形成测试用例
+
+## pom版本
+> 测试环境下使用version-SNAPSHOT，正式环境下使用version即可
