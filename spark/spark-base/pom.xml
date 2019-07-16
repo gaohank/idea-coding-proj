@@ -25,38 +25,21 @@
             <version>3.17</version>
         </dependency>
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.11</artifactId>
-            <version>3.0.0</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- 使scala进行单元测试 -->
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.12</artifactId>
-            <version>3.0.1</version>
-            <scope>test</scope>
+            <artifactId>scalatest_${scala.version}</artifactId>
         </dependency>
         <!-- 增加scala-library的依赖 -->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
-            <version>2.11.8</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
-            <version>2.1.0</version>
+            <artifactId>spark-core_${scala.version}</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-launcher_2.11</artifactId>
-            <version>2.1.0</version>
+            <artifactId>spark-launcher_${scala.version}</artifactId>
         </dependency>
     </dependencies>
 
