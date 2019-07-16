@@ -21,6 +21,7 @@
         <module>spark-base</module>
         <module>spark-streaming</module>
         <module>spark-sql</module>
+        <module>spark-learning</module>
     </modules>
 
     <dependencyManagement>
