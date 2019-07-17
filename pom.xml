@@ -53,4 +53,18 @@
         </dependency>
     </dependencies>
 
+    <!-- 定义快照库和正式库的地址 -->
+    <distributionManagement>
+        <!-- 仓库的id需要和settings.xml保持一致 -->
+        <repository>
+            <id>archiva.internal</id>
+            <name>Internal Release Repository</name>
+<!--            <url>release url</url>-->
+        </repository>
+        <snapshotRepository>
+            <id>archiva.snapshots</id>
+            <name>Internal Snapshot Repository</name>
+<!--            <url>snapshot url</url>-->
+        </snapshotRepository>
+    </distributionManagement>
 </project>
