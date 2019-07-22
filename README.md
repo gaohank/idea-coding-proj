@@ -36,3 +36,4 @@
 
 ## pom版本
 > 测试环境下使用version-SNAPSHOT，正式环境下使用version即可
+> 提取公共pom
