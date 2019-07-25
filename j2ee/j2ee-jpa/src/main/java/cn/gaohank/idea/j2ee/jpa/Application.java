@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Slf4j
-@EnableJpaRepositories("cn.gaohank.program.dao")
+@EnableJpaRepositories("cn.gaohank.idea.j2ee.jpa.dao")
 @SpringBootApplication
 public class Application {
 
