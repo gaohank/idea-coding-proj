@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="dev">
+        <include resource="log-spring-dev.xml"/>
+    </springProfile>
+    <springProfile name="test">
+        <include resource="log-spring-test.xml"/>
+    </springProfile>
+    <springProfile name="prod">
+        <include resource="log-spring-prod.xml"/>
+    </springProfile>
+</configuration>
