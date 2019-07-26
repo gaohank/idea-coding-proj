@@ -126,6 +126,7 @@
                     <!--支持静态文件热部署-->
                     <addResources>true</addResources>
                 </configuration>
+                <version>1.5.9.RELEASE</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
