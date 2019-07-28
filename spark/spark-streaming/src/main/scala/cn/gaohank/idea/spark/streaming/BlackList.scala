@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
-  * 在bash上开启端口：8888
+  * 在bash上开启端口：9999
   * 通过nc输入日志内容
   * 输入的内容为：
   * 1 james
