@@ -1,9 +1,7 @@
 package cn.gaohank.idea.spark.sql
 
-import org.apache.spark.sql.{Row, SparkSession}
-import org.apache.spark.{SparkConf, SparkContext}
-
-case class StudentSchema(id: Int, name: String, age: Int)
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.SparkSession
 
 object SparkSqlDemo {
     def main(args: Array[String]): Unit = {
