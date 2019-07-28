@@ -13,6 +13,11 @@
     <version>1.0</version>
 
     <dependencies>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>connectorj</artifactId>
+            <version>5.1.12</version>
+        </dependency>
         <!-- 使用scala-test执行测试用例 -->
         <dependency>
             <groupId>org.scalatest</groupId>
