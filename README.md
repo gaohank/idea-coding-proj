@@ -34,6 +34,9 @@
 ## 测试
 > 新知识点，可以合并到该项目中，形成测试用例
 
+## github地址
+> [github地址](https://github.com/)
+
 ## pom版本
 > 测试环境下使用version-SNAPSHOT，正式环境下使用version即可
 > 提取公共pom
