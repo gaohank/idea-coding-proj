@@ -1,0 +1,12 @@
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule">
+    <kbase name="rules" packages="rules/test1">
+        <ksession name="ksession-rules"/>
+    </kbase>
+
+    <kbase name="TemplatesKB" packages="rules/test2">
+        <ruleTemplate dtable="rules/ExampleCheese.xls"
+                      template="rules/test.drl"
+                      row="2" col="2"/>
+        <ksession name="TemplatesKS"/>
+    </kbase>
+</kmodule>

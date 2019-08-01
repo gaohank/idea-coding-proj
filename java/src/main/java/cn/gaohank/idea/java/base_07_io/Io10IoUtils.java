@@ -6,11 +6,12 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Io10IoUtils {
     public static String getContent(String resourceName) throws Exception {
-        return IOUtils.toString(Io10IoUtils.class.getClassLoader().getResourceAsStream(resourceName), "utf8");
+        return IOUtils.toString(Objects.requireNonNull(Io10IoUtils.class.getClassLoader().getResourceAsStream(resourceName)), "utf8");
     }
 
     public static List<String> getQueries(File file, String path) {

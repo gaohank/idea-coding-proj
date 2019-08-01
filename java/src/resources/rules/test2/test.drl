@@ -1,0 +1,21 @@
+template header
+age
+type
+log
+
+import cn.gaohank.idea.java.base_13_drools.PersonForTemplate;
+import cn.gaohank.idea.java.base_13_drools.Cheese;
+
+global java.util.List list;
+
+
+template "cheesefans"
+
+rule "Cheese fans_@{row.rowNumber}"
+    when
+        PersonForTemplate(age == @{age})
+        Cheese(type == "@{type}")
+    then
+        list.add("@{log}");
+    end
+end template

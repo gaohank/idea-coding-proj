@@ -12,6 +12,10 @@
     <artifactId>java</artifactId>
     <version>1.0</version>
 
+    <properties>
+        <drools.version>7.11.0.Final</drools.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.json</groupId>
@@ -59,10 +63,51 @@
             <artifactId>htmlunit</artifactId>
             <version>2.33</version>
         </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-compiler</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.drools/drools-core -->
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-decisiontables</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.drools/drools-templates -->
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-templates</artifactId>
+            <version>${drools.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>java</finalName>
+        <resources>
+            <resource>
+                <directory>src/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>*.*</include>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
+            <!-- 预编译rules防止语法错误 -->
+<!--            <plugin>-->
+<!--                <groupId>org.kie</groupId>-->
+<!--                <artifactId>kie-maven-plugin</artifactId>-->
+<!--                <version>${drools.version}</version>-->
+<!--                <extensions>true</extensions>-->
+<!--            </plugin>-->
+
             <!-- 控制junit的测试 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
