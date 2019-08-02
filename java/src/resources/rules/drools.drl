@@ -1,3 +1,4 @@
+package com.logic
 import cn.gaohank.idea.java.base_13_drools.Order.Car;
 
 rule "age>30"
