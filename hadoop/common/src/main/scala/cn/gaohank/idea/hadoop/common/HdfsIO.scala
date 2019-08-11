@@ -58,7 +58,6 @@ object HdfsIO {
 
       val format = classOf[SequenceFileOutputFormat[Writable, Writable]]
       val jobConf = new JobConf(rdd.context.hadoopConfiguration)
-
       rdd
         .map { v =>
           val bytes =
