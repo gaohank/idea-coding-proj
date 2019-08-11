@@ -2,7 +2,6 @@ package cn.gaohank.idea.hadoop.common
 
 import java.io.{ByteArrayOutputStream, InputStream}
 
-import cn.gaohank.idea.meta.ThingMeta
 import org.apache.hadoop.io.compress.{CompressionCodec, DefaultCodec}
 import org.apache.hadoop.io.{BytesWritable, Writable}
 import org.apache.hadoop.mapred.{JobConf, SequenceFileOutputFormat}
@@ -40,38 +39,10 @@ object HdfsIO {
     out.toByteArray
   }
 
-  def saveTest(rdd: RDD[ThingMeta], output: String, protocal: String = "compact"): Unit = {
-    rdd.map {v =>
-      val bytes =
-        protocal match {
-          case "compact" => serCompactThrift(v)
-          case "binary" => serBinaryThrift(v)
-          case _ => throw new IllegalArgumentException(s"unsupported protocal: $protocal")
-        }
-      new BytesWritable(bytes)
-    }.saveAsTextFile(output)
-  }
-
   /**
     * 为thrift对象的RDD类增加保存为paruqet/sequence文件的方法
     */
-  implicit class RDDThriftOutputWrapper[T <: TBase[_, _] : ClassTag](val rdd: RDD[T]) {
-    def serCompact(info: T): Array[Byte] = {
-      val out = new ByteArrayOutputStream()
-      val transport = new TIOStreamTransport(out)
-      val protocol = new TCompactProtocol(transport)
-      info.write(protocol)
-      out.toByteArray
-    }
-
-    def serBinary(info: T): Array[Byte] = {
-      val out = new ByteArrayOutputStream()
-      val transport = new TIOStreamTransport(out)
-      val protocol = new TBinaryProtocol(transport)
-      info.write(protocol)
-      out.toByteArray
-    }
-
+  implicit class RDDThriftOutputWrapper[T <: TBase[_, _] : ClassTag](val rdd: RDD[T]) extends Serializable {
     def saveAsSequenceFile(output: String,
                            codec: Class[_ <: CompressionCodec] = classOf[DefaultCodec],
                            protocal: String = "compact"): Unit = {
@@ -83,8 +54,8 @@ object HdfsIO {
         .map { v =>
           val bytes =
             protocal match {
-              case "compact" => serCompact(v)
-              case "binary" => serBinary(v)
+              case "compact" => serCompactThrift(v)
+              case "binary" => serBinaryThrift(v)
               case _ => throw new IllegalArgumentException(s"unsupported protocal: $protocal")
             }
           (new BytesWritable(), new BytesWritable(bytes))
@@ -93,9 +64,9 @@ object HdfsIO {
           output,
           classOf[BytesWritable],
           classOf[BytesWritable],
-          format
-//          jobConf,
-//          Some(codec)
+          format,
+          jobConf,
+          Some(codec)
         )
     }
   }

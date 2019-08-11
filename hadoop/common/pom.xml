@@ -53,7 +53,7 @@
                 <artifactId>maven-thrift-plugin</artifactId>
                 <version>0.1.11</version>
                 <configuration>
-<!--                    <thriftExecutable>/usr/local/bin/thrift</thriftExecutable>-->
+                    <thriftExecutable>thrift</thriftExecutable>
 <!--                    <thriftSourceRoot>src/main/thrift</thriftSourceRoot>-->
 <!--                    <outputDirectory>src/main/java</outputDirectory>-->
                     <generator>java</generator>
@@ -66,13 +66,6 @@
                             <goal>compile</goal>
                         </goals>
                     </execution>
-                    <!--<execution>-->
-                    <!--<id>thrift-test-sources</id>-->
-                    <!--<phase>generate-test-sources</phase>-->
-                    <!--<goals>-->
-                    <!--<goal>testCompile</goal>-->
-                    <!--</goals>-->
-                    <!--</execution>-->
                 </executions>
             </plugin>
             <!-- 让maven能够编译、测试、运行scala项目 -->
