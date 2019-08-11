@@ -5,6 +5,10 @@ import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 import org.apache.hadoop.io.compress.{CompressionCodec, DefaultCodec}
 import org.apache.hadoop.io.{BytesWritable, Writable}
 import org.apache.hadoop.mapred.{JobConf, SequenceFileOutputFormat}
+import org.apache.hadoop.mapreduce.Job
+import org.apache.parquet.hadoop.metadata.CompressionCodecName
+import org.apache.parquet.hadoop.thrift.{ParquetThriftInputFormat, ParquetThriftOutputFormat, ThriftReadSupport}
+import org.apache.parquet.hadoop.{ParquetInputFormat, ParquetOutputFormat}
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 import org.apache.thrift.TBase
@@ -12,7 +16,7 @@ import org.apache.thrift.protocol.{TBinaryProtocol, TCompactProtocol}
 import org.apache.thrift.transport.TIOStreamTransport
 import org.slf4j.{Logger, LoggerFactory}
 
-import scala.reflect.ClassTag
+import scala.reflect.{ClassTag, classTag}
 
 object HdfsIO {
   private val logger: Logger =
@@ -77,6 +81,26 @@ object HdfsIO {
           Some(codec)
         )
     }
+
+    def saveAsParquetFile(output: String,
+                          compress: CompressionCodecName = CompressionCodecName.SNAPPY,
+                          enableDictionary: Boolean = true): Unit = {
+      val job = Job.getInstance(rdd.sparkContext.hadoopConfiguration)
+      val beanClass = classTag[T].runtimeClass.asInstanceOf[Class[T]]
+//      ParquetThriftOutputFormat.setThriftClass(job, beanClass)
+      ParquetOutputFormat.setWriteSupportClass(job, beanClass)
+      ParquetOutputFormat.setCompression(job, compress)
+      ParquetOutputFormat.setEnableDictionary(job, enableDictionary)
+      rdd
+        .map(o => (null, o))
+        .saveAsNewAPIHadoopFile(
+          output,
+          classOf[Void],
+          beanClass,
+          classOf[ParquetThriftOutputFormat[T]],
+          job.getConfiguration
+        )
+    }
   }
 
   /**
@@ -98,6 +122,29 @@ object HdfsIO {
             o
           }
         }
+    }
+
+    def thriftParquetFile[T <: TBase[_, _]: ClassTag](path: String,
+                                                      thriftClass: Class[T],
+                                                      columnFilter: String = "",
+                                                      forceMatch: Boolean = false): RDD[T] = {
+
+      val jobConf = new JobConf(sc.hadoopConfiguration)
+      if (columnFilter != "") {
+        jobConf.set(ThriftReadSupport.THRIFT_COLUMN_FILTER_KEY, columnFilter)
+      }
+
+      ParquetThriftInputFormat.setThriftClass(jobConf, thriftClass)
+      ParquetInputFormat.setReadSupportClass(jobConf, classOf[ThriftReadSupport[T]])
+      val rdd =
+        sc.newAPIHadoopFile(
+          path,
+          classOf[ParquetThriftInputFormat[T]],
+          classOf[Void],
+          thriftClass,
+          jobConf
+        )
+      rdd.map { case (void, obj) => obj }
     }
   }
 }
