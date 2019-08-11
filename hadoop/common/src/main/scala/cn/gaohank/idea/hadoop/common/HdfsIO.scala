@@ -82,8 +82,8 @@ object HdfsIO {
   /**
     * 为SparkConetxt配上thriftParquetFile方法，直接加载parquet文件为thrift对象RDD
     */
-  implicit class SparkContextThriftFileWrapper[T <: TBase[_, _]: ClassTag](val sc: SparkContext) {
-    def thriftSequenceFile(path: String,
+  implicit class SparkContextThriftFileWrapper(val sc: SparkContext) {
+    def thriftSequenceFile[T <: TBase[_, _]: ClassTag](path: String,
                            thriftClass: Class[T],
                            protocal: String = "compact"): RDD[T] = {
       sc.sequenceFile[Array[Byte], Array[Byte]](path)
