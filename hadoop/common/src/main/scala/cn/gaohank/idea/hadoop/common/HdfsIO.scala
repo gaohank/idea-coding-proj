@@ -87,7 +87,7 @@ object HdfsIO {
                           enableDictionary: Boolean = true): Unit = {
       val job = Job.getInstance(rdd.sparkContext.hadoopConfiguration)
       val beanClass = classTag[T].runtimeClass.asInstanceOf[Class[T]]
-//      ParquetThriftOutputFormat.setThriftClass(job, beanClass)
+      ParquetThriftOutputFormat.setThriftClass(job, beanClass)
       ParquetOutputFormat.setWriteSupportClass(job, beanClass)
       ParquetOutputFormat.setCompression(job, compress)
       ParquetOutputFormat.setEnableDictionary(job, enableDictionary)

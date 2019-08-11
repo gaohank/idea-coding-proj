@@ -18,6 +18,6 @@ object WriteData {
     meta2.name = "james"
     meta2.area = "北京"
     val metaRdd = sc.parallelize(Array(meta1, meta2))
-    metaRdd.saveAsSequenceFile(output)
+    metaRdd.saveAsParquetFile(output)
   }
 }
