@@ -144,7 +144,7 @@ object HdfsIO {
           thriftClass,
           jobConf
         )
-      rdd.map { case (void, obj) => obj }
+      rdd.map { case (_, obj) => obj }
     }
   }
 }

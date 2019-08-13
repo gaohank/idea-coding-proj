@@ -13,7 +13,7 @@ object ReadData {
       .setIfMissing("spark.master", "local")
     conf.setIfMissing("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
     val sc = new SparkContext(conf)
-    val metaRdd = sc.thriftSequenceFile(input, classOf[ThingMeta])
+    val metaRdd = sc.thriftParquetFile(input, classOf[ThingMeta])
     metaRdd.foreach(println)
   }
 }
