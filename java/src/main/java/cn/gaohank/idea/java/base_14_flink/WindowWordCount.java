@@ -28,6 +28,7 @@ public class WindowWordCount {
                         out.collect(new WordWithCount(word, 1L));
                     }
                 })
+                .returns(WordWithCount.class)
                 .keyBy("word")
                 .timeWindow(Time.seconds(5), Time.seconds(1))
                 .reduce((ReduceFunction<WordWithCount>) (a, b) -> new WordWithCount(a.word, a.count + b.count));
@@ -41,10 +42,10 @@ public class WindowWordCount {
     // Data type for words with count
     public static class WordWithCount {
 
-        public String word;
-        public long count;
+        String word;
+        long count;
 
-        public WordWithCount(String word, long count) {
+        WordWithCount(String word, long count) {
             this.word = word;
             this.count = count;
         }
