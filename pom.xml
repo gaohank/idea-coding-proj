@@ -20,7 +20,6 @@
         <module>scala</module>
         <module>desigin</module>
         <module>j2ee</module>
-        <module>thrift</module>
         <module>spark</module>
         <module>hadoop</module>
     </modules>
