@@ -27,11 +27,11 @@
             <artifactId>parquet-hadoop</artifactId>
             <version>1.7.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.parquet</groupId>
-            <artifactId>parquet-thrift</artifactId>
-            <version>1.7.0-match</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.parquet</groupId>-->
+<!--            <artifactId>parquet-thrift</artifactId>-->
+<!--            <version>1.7.0-match</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.twitter.elephantbird</groupId>
             <artifactId>elephant-bird-core</artifactId>
